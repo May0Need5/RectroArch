@@ -70,7 +70,7 @@
 
 #define CONTENT_PATH_ARG_INDEX 1
 #define EBOOT_PATH "/app0/"
-#define USER_PATH "/download0/retroarch/"
+#define USER_PATH "/data/retroarch/"
 #define CORE_DIR "cores"
 #define CORE_INFO_PATH USER_PATH
 #if defined(BUNDLE_CORES)
