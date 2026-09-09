@@ -109,7 +109,7 @@ PREFIX := orbis-
 CC      := clang
 CXX     := clang++
 AS      := $(PREFIX)as
-AR      := $(PREFIX)ar
+AR      := ar
 OBJCOPY := $(PREFIX)objcopy
 STRIP   := $(PREFIX)strip
 NM      := $(PREFIX)nm
@@ -220,6 +220,9 @@ OBJOUT   = -o
 	@$(if $(Q), $(shell echo echo CC $<),)
 	$(Q)$(CC) -c $(OBJOUT)$@ $<
 
+$(TARGET).a: $(OBJ)
+	$(Q)$(AR) rcs $(TARGET).a $(OBJ)
+
 $(TARGET).elf: $(OBJ)
 	@$(if $(Q), $(shell echo echo LD $@),)
 	$(Q)$(LD) $(ORBISDEV)/usr/lib/crt0.o $(OBJ) $(LDFLAGS) $(LIBS) -o $(TARGET).elf
@@ -229,10 +232,6 @@ $(TARGET).oelf: $(TARGET).elf
 
 $(TARGET).self: $(TARGET).oelf
 	python $(ORBISDEV)/bin/make_fself.py --auth-info $(AUTH_INFO) --paid 0x3800000000000035 $(TARGET).oelf $(TARGET).self
-
-$(TARGET).a: $(OBJ)
-	@$(if $(Q), $(shell echo echo AR $@),)
-	$(Q)$(AR) rcs $@ $(OBJ)
 
 install:
 	cp $(TARGET).self $(SELF_PATH_INSTALL)/homebrew.self
