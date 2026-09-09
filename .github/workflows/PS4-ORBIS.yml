@@ -44,8 +44,8 @@ jobs:
           retroarch_orbis.elf
           retroarch_orbis.oelf
           retroarch_orbis.self
+          retroarch_orbis.a
           **/*.o
-          **/*.a
 
     - name: Version of binaries
       run: |
